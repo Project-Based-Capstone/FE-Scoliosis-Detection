@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Scolio-lysis</string>
+    <string name="title1">Scolio-</string>
+    <string name="title2">lysis</string>
+    <string name="register">Register</string>
+    <string name="registerTitle">Create new account</string>
+    <string name="login">Login</string>
+    <string name="loginTitle">Welcome Back!</string>
+    <string name="email">Email</string>
+    <string name="insertEmail">Insert email</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="insertPassword">Insert password</string>
+    <string name="btnRegist">Register</string>
+    <string name="btnLogin">Login</string>
+    <string name="emailWarning">Please</string>
+    <string name="passwordWarning">Please</string>
+    <string name="shortPasswordWarning">Please</string>
+    <string name="usernameWarning">Please</string>
+    <string name="imageDesc">Image</string>
+    <string name="hasil_analisa">Hasil Analisa</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="date">date</string>
+    <string name="name">Nama</string>
+    <string name="birthdate">Tanggal Lahir</string>
+    <string name="hasil">Hasil</string>
+    <string name="risk">Beresiko</string>
+    <string name="save">Simpan</string>
+    <string name="description">Description</string>
+    <string name="age">Usia</string>
+    <string name="dateofbirth">DD/MM/YYYY</string>
+    <string name="age_result">years old</string>
+</resources>
