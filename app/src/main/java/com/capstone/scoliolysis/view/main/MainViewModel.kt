@@ -1,6 +1,7 @@
 package com.capstone.scoliolysis.view.main
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.capstone.scoliolysis.model.DataItem
 import com.capstone.scoliolysis.model.DataResponse
@@ -13,6 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel(private val pref: UserPreference) : ViewModel() {
+
+    var isLinear: Boolean = true
 
     private val _listData = MutableLiveData<List<DataItem>>()
     val listData: LiveData<List<DataItem>> = _listData
@@ -28,18 +31,27 @@ class MainViewModel(private val pref: UserPreference) : ViewModel() {
                 call: Call<DataResponse>,
                 response: Response<DataResponse>
             ) {
-
+                if(response.isSuccessful){
+                    _listData.value = response.body()?.data!!
+                } else {
+                    Log.e("Error", "message: Error")
+                }
             }
             override fun onFailure(call: Call<DataResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("MainViewModel", "onFailure: ${t.message.toString()}")
             }
+
         }
         )
     }
 
     fun getUser(): LiveData<User> {
         return pref.getUser().asLiveData()
+    }
+
+    fun getData(): LiveData<List<DataItem>> {
+        return _listData
     }
 
     fun logOutUser() {

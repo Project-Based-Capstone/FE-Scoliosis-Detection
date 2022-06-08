@@ -6,9 +6,6 @@
             android:title="Ganti Tampilan"
         />
         <item
-            android:id="@+id/menu_delete"
-            android:title="Hapus"/>
-        <item
             android:id="@+id/menu_logout"
             android:title="Logout" />
     </group>

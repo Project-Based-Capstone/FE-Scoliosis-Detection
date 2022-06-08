@@ -6,12 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginHorizontal="30dp"
-    android:padding="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     card_view:cardCornerRadius="15dp"
     >
 
@@ -24,23 +21,21 @@
             android:id="@+id/dateTV"
             android:layout_width="128dp"
             android:layout_height="26dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:text="Date"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.098"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="28dp" />
 
         <TextView
             android:id="@+id/descTV"
-            android:layout_width="209dp"
-            android:layout_height="77dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="Description"
             card_view:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="47dp" />
+            card_view:layout_constraintTop_toBottomOf="@+id/dateTV" />
 
         <TextView
             android:id="@+id/noticeTV"
@@ -48,23 +43,23 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Risk"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/red_salmon"
+            android:layout_marginStart="15dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.067"
             card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/descTV"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imgItem"
-            android:layout_width="82dp"
-            android:layout_height="86dp"
+            android:layout_width="108dp"
+            android:layout_height="111dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="fitXY"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.578"
-            card_view:layout_constraintStart_toEndOf="@+id/descTV"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.494"
-            tools:ignore="MissingConstraints"
             tools:srcCompat="@tools:sample/avatars" />
 
 

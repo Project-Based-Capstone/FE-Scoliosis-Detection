@@ -8,6 +8,7 @@ import com.capstone.scoliolysis.view.insertData.DataViewModel
 import com.capstone.scoliolysis.view.login.LoginViewModel
 import com.capstone.scoliolysis.view.main.MainViewModel
 import com.capstone.scoliolysis.view.register.RegisterViewModel
+import com.capstone.scoliolysis.view.result.ResultViewModel
 
 class ViewModelFactory(private val pref: UserPreference, private val context: Context? = null) :
     ViewModelProvider.NewInstanceFactory() {
@@ -26,6 +27,9 @@ class ViewModelFactory(private val pref: UserPreference, private val context: Co
             }
             modelClass.isAssignableFrom(DataViewModel::class.java) -> {
                 DataViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(ResultViewModel::class.java) -> {
+                ResultViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

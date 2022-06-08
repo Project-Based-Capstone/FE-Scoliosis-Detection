@@ -5,12 +5,16 @@ import android.content.Intent
 import android.content.Intent.EXTRA_USER
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,9 +31,8 @@ import com.capstone.scoliolysis.view.welcome.WelcomeActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var adapter: MainAdapter
-    private val data = ArrayList<DataItem>()
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +40,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupViewModel()
-        binding.fabAdd.setOnClickListener{
+        binding.fabAdd.setOnClickListener {
             val i = Intent(this, PreviewActivity::class.java)
             startActivity(i)
             finish()
         }
+
+
     }
+
 
     private fun setupViewModel() {
         val pref = UserPreference.getInstance(dataStore)
@@ -54,26 +60,32 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getUser().observe(this) {
             if (it.isLogin) {
                 mainViewModel.loadData(it.accessToken)
-                setRecyclerData(data)
+                mainViewModel.listData.observe(this) { list ->
+                    setRecyclerData(list)
+                }
+
             } else {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
         }
-
     }
 
-    private fun setRecyclerData(data: List<DataItem>) {
+    private fun setRecyclerData(items: List<DataItem>) {
+        if (!mainViewModel.isLinear) {
+            binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        } else {
+            binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        }
         binding.recyclerView.visibility = View.VISIBLE
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val listData = ArrayList<DataItem>()
-        for (list in data) {
-            listData.clear()
-            listData.addAll(data)
+        val listItem = ArrayList<DataItem>()
+        for (item in items) {
+            listItem.clear()
+            listItem.addAll(items)
         }
 
-        val adapter = MainAdapter(listData)
+        val adapter = MainAdapter(listItem)
         binding.recyclerView.adapter = adapter
 
         adapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
@@ -100,12 +112,13 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun changeLayout(){
-        if (binding.recyclerView.layoutManager == LinearLayoutManager(this)){
-            binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-        } else {
-            binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    private fun changeLayout() {
+        if (!mainViewModel.isLinear) {
+            mainViewModel.isLinear = true
+        } else if (mainViewModel.isLinear) {
+            mainViewModel.isLinear = false
         }
+        this.recreate()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -114,9 +127,9 @@ class MainActivity : AppCompatActivity() {
                 changeLayout()
                 true
             }
-            R.id.menu_delete -> {
-                true
-            }
+//            R.id.menu_delete -> {
+//                true
+//            }
             R.id.menu_logout -> {
                 mainViewModel.logOutUser()
                 val i = Intent(this, WelcomeActivity::class.java)

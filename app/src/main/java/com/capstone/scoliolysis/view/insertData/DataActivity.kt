@@ -114,7 +114,7 @@ class DataActivity : AppCompatActivity() {
         val image: RequestBody = file.asRequestBody("image/jpg".toMediaType())
 
         val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "photo",
+            "file",
             file.name,
             image
         )

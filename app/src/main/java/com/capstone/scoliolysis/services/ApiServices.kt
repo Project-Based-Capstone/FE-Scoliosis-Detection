@@ -21,14 +21,15 @@ interface ApiServices {
         @Field("password") password: String
     ): Call<LoginResponse>
 
-    @GET("records")
+    @GET("record")
     fun loadAll(
         @Header("Authorization") token: String
     ) : Call<DataResponse>
 
 
-    @GET("records/{id}")
+    @GET("record/{id}")
     fun loadDetail(
+        @Header("Authorization") token: String,
         @Path("id") id: Int
     ) : Call<DataItem>
 
@@ -40,4 +41,11 @@ interface ApiServices {
         @Part("dateOfBirth") dateOfBirth: RequestBody?,
         @Part file: MultipartBody.Part
     ): Call<AddDataResponse>
+
+    @FormUrlEncoded
+    @DELETE("{id}")
+    fun deleteData(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ) : Call<DeleteResponse>
 }

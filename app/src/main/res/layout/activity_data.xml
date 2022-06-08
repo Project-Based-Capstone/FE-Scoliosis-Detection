@@ -6,136 +6,163 @@
     android:layout_height="match_parent"
     tools:context=".view.insertData.DataActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageViewData"
+                android:layout_width="424dp"
+                android:layout_height="294dp"
+                android:contentDescription="@string/imageDesc"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <ImageView
-        android:id="@+id/imageViewData"
-        android:layout_width="424dp"
-        android:layout_height="294dp"
-        android:contentDescription="@string/imageDesc"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <TextView
+                android:id="@+id/hasilTextView"
+                android:layout_width="108dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/hasil_analisa"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewData" />
 
-    <TextView
-        android:id="@+id/hasilTextView"
-        android:layout_width="108dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="@string/hasil_analisa"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewData" />
+            <TextView
+                android:id="@+id/tanggalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="30dp"
+                android:text="@string/tanggal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewData" />
 
-    <TextView
-        android:id="@+id/tanggalTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/tanggal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewData" />
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text="@string/date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.107"
+                app:layout_constraintStart_toEndOf="@+id/tanggalTextView"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewData" />
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
-        app:layout_constraintStart_toEndOf="@+id/tanggalTextView"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewData" />
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="30dp"
+                android:labelFor="@+id/editTextName"
+                android:text="@string/name"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tanggalTextView" />
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/name"
-        android:labelFor="@+id/editTextName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tanggalTextView" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/editTextNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameTextView">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextName"
+                    android:layout_width="match_parent"
+                    android:textSize="13dp"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="320dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="5dp"
-        android:ems="1"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/birthdateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:labelFor="@+id/editTextDate"
-        android:text="@string/birthdate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+            <TextView
+                android:id="@+id/birthdateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:labelFor="@+id/editTextDate"
+                android:text="@string/birthdate"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNameLayout" />
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="339dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/button_rounded_save"
-        android:backgroundTint="@color/yellow"
-        android:text="@string/save"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/button_rounded_save"
+                android:backgroundTint="@color/yellow"
+                android:text="@string/save"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDateLayout" />
 
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="253dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/dateofbirth"
-        app:layout_constraintEnd_toEndOf="@+id/birthdateTextView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/birthdateTextView"
-        app:layout_constraintTop_toBottomOf="@+id/birthdateTextView" />
+            <RelativeLayout
+                android:id="@id/textViewDateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/birthdateTextView"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="30dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/buttonPickDate"
-        android:layout_width="56dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="48dp"
-        android:drawableEnd="@drawable/ic_baseline_calendar_today_24"
-        android:text="@string/datepick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toEndOf="@+id/textViewDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+                <TextView
+                    android:id="@+id/textViewDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_toStartOf="@+id/buttonPickDate"
+                    android:text="@string/dateofbirth" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/buttonPickDate"
+                    android:layout_width="55dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:drawableEnd="@drawable/ic_baseline_calendar_today_24"
+                    android:text="@string/datepick" />
+            </RelativeLayout>
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
