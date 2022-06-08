@@ -21,15 +21,14 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun signInUser(email: String, password: String) {
-        _isLoading.value = true
         val client = ApiConfig.getApiService().login(email, password)
         client.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
+                Log.d("Disini", "MASUK")
                 if (response.isSuccessful) {
-                    _isLoading.value = false
                     _response.value = response.body()
                     viewModelScope.launch {
                         response.body()?.user?.let {
@@ -37,20 +36,20 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
                         }
                     }
                 } else {
-                    _isLoading.value = false
                     _response.value =
-                        LoginResponse(
-                            response.body()!!.error,
-                            response.body()!!.message,
-                            null
-                        )
+                        response.body()?.let {
+                            LoginResponse(
+                                it.error,
+                                it.message,
+                                null
+                            )
+                        }
                     Log.e("LoginViewModel", "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                _isLoading.value = false
-                Log.e("LoginViewModel", "onFailure: ${t.message}")
+                Log.e("LoginViewModelll", "onFailure: ${t.message}")
             }
         })
     }

@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gaming 3i/AndroidStudioProjects/FE-Scoliosis-Detection/app/src/main/res/drawable/button_rounded_save.xml" value="0.1" />
+        <entry key="..\:/Users/Gaming 3i/AndroidStudioProjects/FE-Scoliosis-Detection/app/src/main/res/layout/activity_data.xml" value="0.24728260869565216" />
+        <entry key="..\:/Users/Gaming 3i/AndroidStudioProjects/FE-Scoliosis-Detection/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Gaming 3i/AndroidStudioProjects/FE-Scoliosis-Detection/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Gaming 3i/Desktop/Bangkit/Scoliolysis/Scoliolysis2/app/src/main/res/layout/activity_data.xml" value="0.12183383991894631" />
       </map>
     </option>

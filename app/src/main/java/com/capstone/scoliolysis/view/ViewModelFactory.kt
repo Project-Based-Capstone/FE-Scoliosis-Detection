@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.scoliolysis.utils.UserPreference
+import com.capstone.scoliolysis.view.insertData.DataViewModel
 import com.capstone.scoliolysis.view.login.LoginViewModel
 import com.capstone.scoliolysis.view.main.MainViewModel
 import com.capstone.scoliolysis.view.register.RegisterViewModel
@@ -22,6 +23,9 @@ class ViewModelFactory(private val pref: UserPreference, private val context: Co
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel() as T
+            }
+            modelClass.isAssignableFrom(DataViewModel::class.java) -> {
+                DataViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
