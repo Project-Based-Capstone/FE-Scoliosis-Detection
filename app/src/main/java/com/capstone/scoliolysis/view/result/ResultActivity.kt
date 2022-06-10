@@ -1,5 +1,6 @@
 package com.capstone.scoliolysis.view.result
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,25 +28,26 @@ class ResultActivity : AppCompatActivity() {
     private var userID: Int? = null
 
     companion object {
-        const val EXTRA_USER = "userDetail"
-
+        const val EXTRA_DATA = "userData"
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val user = intent.getParcelableExtra<DataItem>(EXTRA_DATA)
 
         resultViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[ResultViewModel::class.java]
 
-        resultViewModel.userDetail.observe(this) { user ->
+        if(user!= null){
             with(binding) {
                 Glide.with(this@ResultActivity)
                     .load(user.image)
-                    .circleCrop()
                     .into(imageViewData)
                 dateTextView.text = user.createdAt
                 nameTextView.text = user.name
@@ -55,26 +57,30 @@ class ResultActivity : AppCompatActivity() {
             }
         }
 
+//        resultViewModel.userDetail.observe(this) { user ->
+//
+//        }
+
         resultViewModel.isLoading.observe(this) {
             showLoading(it, binding.progressBar)
         }
 
-        val userIntent = intent.getParcelableExtra<DataItem>(EXTRA_USER)
-        if (userIntent != null) {
-            userIntent.id?.let {
-                userID = it
-            }
-        }
 
-        resultViewModel.getUser().observe(this) {
-            if (it.isLogin) {
-                token = it.accessToken
-                userID?.let { it1 -> resultViewModel.getDetailUser(token!!, it1) }
-            } else {
-                startActivity(Intent(this, WelcomeActivity::class.java))
-                finish()
-            }
-        }
+//        if (userIntent != null) {
+//            userIntent.id?.let {
+//                userID = it
+//            }
+//        }
+
+//        resultViewModel.getUser().observe(this) {
+//            if (it.isLogin) {
+//                token = it.accessToken
+//                userID?.let { it1 -> resultViewModel.getDetailUser(token!!, it1) }
+//            } else {
+//                startActivity(Intent(this, WelcomeActivity::class.java))
+//                finish()
+//            }
+//        }
     }
 
     private fun deleteData() {

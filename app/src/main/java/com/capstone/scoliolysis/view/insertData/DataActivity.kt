@@ -2,6 +2,7 @@ package com.capstone.scoliolysis.view.insertData
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.capstone.scoliolysis.databinding.ActivityDataBinding
 import com.capstone.scoliolysis.utils.UserPreference
 import com.capstone.scoliolysis.utils.reduceFileImage
 import com.capstone.scoliolysis.view.ViewModelFactory
+import com.capstone.scoliolysis.view.main.MainActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -80,13 +82,15 @@ class DataActivity : AppCompatActivity() {
                     binding.textViewDate.text = date
                     val age = getAge(i, i2,i3)
                     this.age = age
-                    Toast.makeText(this, "Age: " + age, Toast.LENGTH_SHORT).show()
 
                 }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
         }
         binding.saveButton.setOnClickListener{
             submitData()
+            val moveToMain = Intent(this, MainActivity::class.java )
+            startActivity(moveToMain)
+            finish()
         }
     }
 
@@ -108,7 +112,6 @@ class DataActivity : AppCompatActivity() {
     @Suppress("CAST_NEVER_SUCCEEDS")
     private fun submitData() {
         val file = reduceFileImage(myFile as File)
-        /** val date = binding.dateTextView.text.toString().toRequestBody("text/plain".toMediaType()) **/
         val name = binding.editTextName.text.toString().toRequestBody("text/plain".toMediaType())
         val dob = this.age?.toRequestBody("text/plain".toMediaType())
         val image: RequestBody = file.asRequestBody("image/jpg".toMediaType())
@@ -119,7 +122,7 @@ class DataActivity : AppCompatActivity() {
             image
         )
 
-       dataViewModel.addResult(
+        dataViewModel.addResult(
             this.token.toString(),
             name,
             dob,

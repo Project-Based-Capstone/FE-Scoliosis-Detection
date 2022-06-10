@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
             finish()
         }
-
-
     }
 
 
@@ -68,6 +66,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
+        }
+        mainViewModel.isLoading.observe(this){
+            showLoading(it, binding.progressBar)
         }
     }
 
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         adapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
             override fun onItemClicked(data: DataItem) {
                 Intent(this@MainActivity, ResultActivity::class.java).apply {
-                    putExtra(ResultActivity.EXTRA_USER, data)
+                    putExtra(ResultActivity.EXTRA_DATA, data)
                     startActivity(this)
                 }
             }
@@ -127,9 +128,6 @@ class MainActivity : AppCompatActivity() {
                 changeLayout()
                 true
             }
-//            R.id.menu_delete -> {
-//                true
-//            }
             R.id.menu_logout -> {
                 mainViewModel.logOutUser()
                 val i = Intent(this, WelcomeActivity::class.java)

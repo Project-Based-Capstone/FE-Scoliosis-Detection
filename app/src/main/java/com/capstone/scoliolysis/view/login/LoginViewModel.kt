@@ -27,23 +27,21 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
-                Log.d("Disini", "MASUK")
                 if (response.isSuccessful) {
                     _response.value = response.body()
                     viewModelScope.launch {
                         response.body()?.user?.let {
-                           pref.setUser(it)
+                            pref.setUser(it)
                         }
                     }
                 } else {
                     _response.value =
-                        response.body()?.let {
-                            LoginResponse(
-                                it.error,
-                                it.message,
-                                null
-                            )
-                        }
+                        LoginResponse(
+                            response.body()!!.error,
+                            response.body()!!.message,
+                            null
+                        )
+
                     Log.e("LoginViewModel", "onFailure: ${response.message()}")
                 }
             }

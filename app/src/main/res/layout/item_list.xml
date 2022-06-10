@@ -13,54 +13,78 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="167dp"
+        android:layout_width="412dp"
+        android:layout_height="wrap_content"
         android:padding="2dp">
 
         <TextView
             android:id="@+id/dateTV"
-            android:layout_width="128dp"
+            android:layout_width="0dp"
             android:layout_height="26dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
             android:text="Date"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            card_view:layout_constraintEnd_toStartOf="@+id/guideline9"
+            card_view:layout_constraintHorizontal_bias="0.192"
             card_view:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="28dp" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/descTV"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="102dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:maxLines="3"
             android:text="Description"
+            android:textAlignment="viewStart"
+            card_view:layout_constraintEnd_toStartOf="@+id/imgItem"
+            card_view:layout_constraintHorizontal_bias="0.017"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/dateTV" />
 
         <TextView
             android:id="@+id/noticeTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Risk"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Risk"
+            android:textStyle="bold"
             android:textColor="@color/red_salmon"
-            android:layout_marginStart="15dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/guideline9"
+            card_view:layout_constraintHorizontal_bias="0.106"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/descTV"
+            card_view:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imgItem"
-            android:layout_width="108dp"
-            android:layout_height="111dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="145dp"
+            android:layout_height="150dp"
             android:scaleType="fitXY"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.36"
+            card_view:layout_constraintStart_toStartOf="@+id/guideline9"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_begin="240dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

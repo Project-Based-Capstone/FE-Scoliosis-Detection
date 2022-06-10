@@ -49,8 +49,6 @@ class DataViewModel(private val pref: UserPreference) : ViewModel() {
                     _response.value = response.body()
                 } else {
                     _isLoading.value = false
-//                    val jsonObject = JSONObject(response.errorBody()!!.charStream().readText())
-//                    _response.value = response.body()
                     Log.e("DataActivityss", "onFailure: ${response.message()}")
                 }
             }

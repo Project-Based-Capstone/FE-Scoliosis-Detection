@@ -16,7 +16,7 @@
     <string name="emailWarning">Insert Email</string>
     <string name="passwordWarning">Insert Password</string>
     <string name="shortPasswordWarning">Insert minimal 6 characters</string>
-    <string name="usernameWarning">Please</string>
+    <string name="usernameWarning">Please insert the correct username</string>
     <string name="imageDesc">Image</string>
     <string name="hasil_analisa">Hasil Analisa</string>
     <string name="tanggal">Tanggal</string>

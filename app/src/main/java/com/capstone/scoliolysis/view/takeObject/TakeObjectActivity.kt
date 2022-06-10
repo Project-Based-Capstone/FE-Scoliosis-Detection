@@ -26,7 +26,6 @@ class TakeObjectActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-    private lateinit var currentPhotoPath: String
     private var imageCapture: ImageCapture? = null
 
     companion object {
@@ -49,7 +48,7 @@ class TakeObjectActivity : AppCompatActivity() {
 
         binding.Camera.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            takeObject()
+                takeObject()
             }
         }
 

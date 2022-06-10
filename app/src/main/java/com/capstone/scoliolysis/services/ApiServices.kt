@@ -42,10 +42,4 @@ interface ApiServices {
         @Part file: MultipartBody.Part
     ): Call<AddDataResponse>
 
-    @FormUrlEncoded
-    @DELETE("{id}")
-    fun deleteData(
-        @Header("Authorization") token: String,
-        @Path("id") id: Int
-    ) : Call<DeleteResponse>
 }
