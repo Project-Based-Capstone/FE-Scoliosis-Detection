@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="15dp"
+                android:textStyle="bold"
                 android:text="@string/tanggal"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintStart_toStartOf="@+id/guideline6"
@@ -55,14 +56,15 @@
 
             <TextView
                 android:id="@+id/dateTextView"
-                android:layout_width="0dp"
-                android:textSize="15dp"
-                android:layout_height="wrap_content"
+                android:layout_width="119dp"
+                android:layout_height="23dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:text="@string/date"
+                android:textSize="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
                 app:layout_constraintTop_toBottomOf="@+id/hasilTextView" />
 
@@ -70,6 +72,7 @@
                 android:id="@+id/nameTextView2"
                 android:layout_width="0dp"
                 android:textSize="15dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/name"
@@ -84,6 +87,7 @@
                 android:layout_height="74dp"
                 android:layout_marginTop="40dp"
                 android:textSize="15dp"
+                android:textAlignment="center"
                 android:text="@string/description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
@@ -100,7 +104,7 @@
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                app:layout_constraintHorizontal_bias="0.428"
+                app:layout_constraintHorizontal_bias="0.195"
                 app:layout_constraintStart_toEndOf="@+id/resultTextView6"
                 app:layout_constraintTop_toBottomOf="@+id/ageTextView" />
 
@@ -124,7 +128,9 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/age"
                 android:textSize="15dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline6"
                 app:layout_constraintTop_toBottomOf="@+id/nameTextView2"
                 tools:ignore="MissingConstraints" />

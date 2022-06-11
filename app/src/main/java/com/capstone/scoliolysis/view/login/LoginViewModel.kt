@@ -1,11 +1,9 @@
 package com.capstone.scoliolysis.view.login
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.capstone.scoliolysis.model.LoginResponse
+import com.capstone.scoliolysis.model.User
 import com.capstone.scoliolysis.services.ApiConfig
 import com.capstone.scoliolysis.utils.UserPreference
 import kotlinx.coroutines.launch
@@ -14,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel(private val pref: UserPreference): ViewModel() {
+
     private val _response = MutableLiveData<LoginResponse>()
     val response: LiveData<LoginResponse> = _response
 
@@ -21,6 +20,7 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun signInUser(email: String, password: String) {
+        _isLoading.value = true
         val client = ApiConfig.getApiService().login(email, password)
         client.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
@@ -28,26 +28,27 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
                 response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
+                    _isLoading.value = false
                     _response.value = response.body()
                     viewModelScope.launch {
                         response.body()?.user?.let {
-                            pref.setUser(it)
+                           pref.setUser(it)
                         }
                     }
                 } else {
-                    _response.value =
-                        LoginResponse(
-                            response.body()!!.error,
-                            response.body()!!.message,
-                            null
-                        )
-
-                    Log.e("LoginViewModel", "onFailure: ${response.message()}")
+                    _isLoading.value = false
+                    _response.value = LoginResponse(
+                        true,
+                        "Cannot Login",
+                        null
+                    )
+                    Log.e("LoginViewModel", response.message())
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginViewModelll", "onFailure: ${t.message}")
+                _isLoading.value = false
+                Log.e("LoginViewModelasdasd", "onFailure: ${t.message}")
             }
         })
     }

@@ -48,7 +48,7 @@ class TakeObjectActivity : AppCompatActivity() {
 
         binding.Camera.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                takeObject()
+            takeObject()
             }
         }
 

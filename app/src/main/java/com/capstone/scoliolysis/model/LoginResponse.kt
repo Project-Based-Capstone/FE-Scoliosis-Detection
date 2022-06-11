@@ -1,8 +1,11 @@
 package com.capstone.scoliolysis.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 data class LoginResponse(
 
 	@field:SerializedName("error")
@@ -14,6 +17,6 @@ data class LoginResponse(
 	@field:SerializedName("user")
 	val user: User?
 
-)
+) : Parcelable
 
 

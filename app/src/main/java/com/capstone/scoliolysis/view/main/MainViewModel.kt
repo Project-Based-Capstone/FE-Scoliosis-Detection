@@ -50,9 +50,6 @@ class MainViewModel(private val pref: UserPreference) : ViewModel() {
         return pref.getUser().asLiveData()
     }
 
-    fun getData(): LiveData<List<DataItem>> {
-        return _listData
-    }
 
     fun logOutUser() {
         viewModelScope.launch {

@@ -112,6 +112,7 @@ class DataActivity : AppCompatActivity() {
     @Suppress("CAST_NEVER_SUCCEEDS")
     private fun submitData() {
         val file = reduceFileImage(myFile as File)
+        /** val date = binding.dateTextView.text.toString().toRequestBody("text/plain".toMediaType()) **/
         val name = binding.editTextName.text.toString().toRequestBody("text/plain".toMediaType())
         val dob = this.age?.toRequestBody("text/plain".toMediaType())
         val image: RequestBody = file.asRequestBody("image/jpg".toMediaType())
@@ -122,7 +123,7 @@ class DataActivity : AppCompatActivity() {
             image
         )
 
-        dataViewModel.addResult(
+       dataViewModel.addResult(
             this.token.toString(),
             name,
             dob,

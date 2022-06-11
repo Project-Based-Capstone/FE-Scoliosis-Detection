@@ -8,10 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import com.capstone.scoliolysis.R
-import com.capstone.scoliolysis.view.insertData.DataActivity
 import com.capstone.scoliolysis.view.main.MainActivity
-import com.capstone.scoliolysis.view.takeObject.PreviewActivity
-import com.capstone.scoliolysis.view.takeObject.TakeObjectActivity
 
 @SuppressLint("CustomSplashScreen")
 @Suppress("DEPRECATION")

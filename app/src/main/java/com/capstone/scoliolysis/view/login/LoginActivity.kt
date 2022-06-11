@@ -11,8 +11,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.scoliolysis.R
 import com.capstone.scoliolysis.databinding.ActivityLoginBinding
+import com.capstone.scoliolysis.model.User
 import com.capstone.scoliolysis.utils.UserPreference
 import com.capstone.scoliolysis.view.ViewModelFactory
 import com.capstone.scoliolysis.view.main.MainActivity
@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[LoginViewModel::class.java]
+
     }
 
     private fun loginUser() {
@@ -46,20 +48,19 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.passwordEditText.text.toString()
 
         loginViewModel.signInUser(email, password)
+
         loginViewModel.isLoading.observe(this){
             showLoading(it, binding.progressBar)
         }
+
         loginViewModel.response.observe(this) {
             if (it.error) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    it.message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                showWarning(false, binding.authWarn)
             } else {
+                showWarning(true, binding.authWarn)
                 AlertDialog.Builder(this).apply {
                     setTitle("Welcome!")
-                    setMessage("Login is successful!")
+                    setMessage("Login anda berhasil")
                     setPositiveButton("Next") { _, _ ->
                         val intent = Intent(context, MainActivity::class.java)
                         intent.flags =
@@ -71,6 +72,13 @@ class LoginActivity : AppCompatActivity() {
                     show()
                 }
             }
+        }
+    }
+    private fun showWarning(isMatch: Boolean, view: View) {
+        if (isMatch) {
+            view.visibility = View.INVISIBLE
+        } else {
+            view.visibility = View.VISIBLE
         }
     }
 

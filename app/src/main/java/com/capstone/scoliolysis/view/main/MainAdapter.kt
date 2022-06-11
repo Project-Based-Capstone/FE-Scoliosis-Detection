@@ -1,5 +1,6 @@
 package com.capstone.scoliolysis.view.main
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,17 +18,12 @@ class MainAdapter(private val data: List<DataItem>) : RecyclerView.Adapter<MainA
         this.onItemClickCallback = onItemClickCallback
     }
 
-    private var dataItem: List<DataItem>? = null
-
-    fun setData(dataItem: List<DataItem>?) {
-        this.dataItem = dataItem
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val list = data[position]
 
@@ -37,7 +33,7 @@ class MainAdapter(private val data: List<DataItem>) : RecyclerView.Adapter<MainA
                 .into(imgItem)
 
             dateTV.text = list.createdAt
-            descTV.text = list.description
+            descTV.text = "Nama: " + list.name + "\n \n Usia: " + list.dateOfBirth
             noticeTV.text = list.detection
 
             holder.itemView.setOnClickListener {

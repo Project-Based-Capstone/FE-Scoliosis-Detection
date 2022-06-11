@@ -2,37 +2,32 @@ package com.capstone.scoliolysis.view.main
 
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.EXTRA_USER
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.scoliolysis.R
 import com.capstone.scoliolysis.databinding.ActivityMainBinding
 import com.capstone.scoliolysis.model.DataItem
+import com.capstone.scoliolysis.model.User
 import com.capstone.scoliolysis.utils.UserPreference
 import com.capstone.scoliolysis.view.ViewModelFactory
 import com.capstone.scoliolysis.view.result.ResultActivity
 import com.capstone.scoliolysis.view.takeObject.PreviewActivity
-import com.capstone.scoliolysis.view.takeObject.TakeObjectActivity
 import com.capstone.scoliolysis.view.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.getUser().observe(this) {
             if (it.isLogin) {
+                this.user = it
                 mainViewModel.loadData(it.accessToken)
                 mainViewModel.listData.observe(this) { list ->
                     setRecyclerData(list)
@@ -66,9 +62,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
-        }
-        mainViewModel.isLoading.observe(this){
-            showLoading(it, binding.progressBar)
         }
     }
 

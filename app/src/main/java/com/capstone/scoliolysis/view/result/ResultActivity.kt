@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.datastore.core.DataStore
@@ -17,6 +18,8 @@ import com.capstone.scoliolysis.databinding.ActivityResultBinding
 import com.capstone.scoliolysis.model.DataItem
 import com.capstone.scoliolysis.utils.UserPreference
 import com.capstone.scoliolysis.view.ViewModelFactory
+import com.capstone.scoliolysis.view.main.MainActivity
+import com.capstone.scoliolysis.view.takeObject.PreviewActivity
 import com.capstone.scoliolysis.view.welcome.WelcomeActivity
 
 class ResultActivity : AppCompatActivity() {
@@ -51,40 +54,33 @@ class ResultActivity : AppCompatActivity() {
                     .into(imageViewData)
                 dateTextView.text = user.createdAt
                 nameTextView.text = user.name
-                ageTextView.text = user.dateOfBirth.toString() + " years old"
+                ageTextView.text = user.dateOfBirth.toString() + " tahun"
                 resultTextView.text = user.detection
                 description.text = user.description
             }
+
+            userID = user.id
         }
-
-//        resultViewModel.userDetail.observe(this) { user ->
-//
-//        }
-
         resultViewModel.isLoading.observe(this) {
             showLoading(it, binding.progressBar)
         }
 
-
-//        if (userIntent != null) {
-//            userIntent.id?.let {
-//                userID = it
-//            }
-//        }
-
-//        resultViewModel.getUser().observe(this) {
-//            if (it.isLogin) {
-//                token = it.accessToken
-//                userID?.let { it1 -> resultViewModel.getDetailUser(token!!, it1) }
-//            } else {
-//                startActivity(Intent(this, WelcomeActivity::class.java))
-//                finish()
-//            }
-//        }
     }
 
     private fun deleteData() {
-        token?.let { userID?.let { it1 -> resultViewModel.deleteEntry(it, it1) } }
+        resultViewModel.getUser().observe(this){
+            token = it.accessToken
+            resultViewModel.deleteEntry(token, userID)
+        }
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_detail, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -27,12 +27,6 @@ interface ApiServices {
     ) : Call<DataResponse>
 
 
-    @GET("record/{id}")
-    fun loadDetail(
-        @Header("Authorization") token: String,
-        @Path("id") id: Int
-    ) : Call<DataItem>
-
     @Multipart
     @POST("record/")
     fun addData(
@@ -42,4 +36,9 @@ interface ApiServices {
         @Part file: MultipartBody.Part
     ): Call<AddDataResponse>
 
+    @DELETE("record/{id}")
+    fun deleteEntry(
+        @Header("Authorization") token: String?,
+        @Path("id") id: Int?
+    ) : Call<DeleteItemResponse>
 }
